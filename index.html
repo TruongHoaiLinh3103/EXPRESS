@@ -9,7 +9,7 @@
 <body>
     <h1 id="lowdb--nodejs-ci">Lowdb</h1>
     <p>Simple to use local JSON database. Use native JavaScript API to query. Written in TypeScript. 🦉</p>
-    <pre><code class="language-js">// Edit db.json content using native JS API
+    <pre class="box-x"><code class="language-js">// Edit db.json content using native JS API
     db.data
     .posts
     .push({ id: 1, title: &#39;lowdb is awesome&#39; })
@@ -17,7 +17,7 @@
     // Save to file
     db.write()
     </code></pre>
-    <pre><code class="language-js">// db.json
+    <pre class="box-x"><code class="language-js">// db.json
     {
     &quot;posts&quot;: [
         { &quot;id&quot;: 1, &quot;title&quot;: &quot;lowdb is awesome&quot; }
@@ -25,11 +25,11 @@
     }
     </code></pre>
     <h2 id="install">Install</h2>
-    <pre><code class="language-sh">npm install lowdb
+    <pre class="box-x"><code class="language-sh">npm install lowdb
     </code></pre>
     <h2 id="usage">Usage</h2>
     <p><em>Lowdb is a pure ESM package. If you&#39;re having trouble importing it in your project, please <a href="https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c">read this</a>.</em></p>
-    <pre><code class="language-js">import { join, dirname } from &#39;node:path&#39;
+    <pre class="box-x"><code class="language-js">import { join, dirname } from &#39;node:path&#39;
     import { fileURLToPath } from &#39;node:url&#39;
 
     // This will work for a local JSON file, for browser usage see examples/ directory
@@ -60,14 +60,14 @@
     // Finally write db.data content to file
     await db.write()
     </code></pre>
-    <pre><code class="language-js">// db.json
+    <pre class="box-x"><code class="language-js">// db.json
     {
     &quot;posts&quot;: [ &quot;hello world&quot; ]
     }
     </code></pre>
     <h3 id="typescript">TypeScript</h3>
     <p>You can use TypeScript to type check your data.</p>
-    <pre><code class="language-ts">type Data = {
+    <pre class="box-x"><code class="language-ts">type Data = {
     words: string[]
     }
 
@@ -84,7 +84,7 @@
     </code></pre>
     <h3 id="lodash">Lodash</h3>
     <p>You can also add lodash or other utility libraries to improve lowdb.</p>
-    <pre><code class="language-ts">import lodash from &#39;lodash&#39;
+    <pre class="box-x"><code class="language-ts">import lodash from &#39;lodash&#39;
 
     type Post = {
     id: number;
@@ -114,14 +114,14 @@
     <h3 id="classes">Classes</h3>
     <p>Lowdb has two classes (for asynchronous and synchronous adapters).</p>
     <h4 id="new-lowadapter"><code>new Low(adapter)</code></h4>
-    <pre><code class="language-js">import { Low, JSONFile } from &#39;lowdb&#39;
+    <pre class="box-x"><code class="language-js">import { Low, JSONFile } from &#39;lowdb&#39;
 
     const db = new Low(new JSONFile(&#39;file.json&#39;))
     await db.read()
     await db.write()
     </code></pre>
     <h4 id="new-lowsyncadaptersync"><code>new LowSync(adapterSync)</code></h4>
-    <pre><code class="language-js">import { LowSync, JSONFileSync } from &#39;lowdb&#39;
+    <pre class="box-x"><code class="language-js">import { LowSync, JSONFileSync } from &#39;lowdb&#39;
 
     const db = new LowSync(new JSONFileSync(&#39;file.json&#39;))
     db.read()
@@ -131,13 +131,13 @@
     <h4 id="dbread"><code>db.read()</code></h4>
     <p>Calls <code>adapter.read()</code> and sets <code>db.data</code>.</p>
     <p><strong>Note:</strong> <code>JSONFile</code> and <code>JSONFileSync</code> adapters will set <code>db.data</code> to <code>null</code> if file doesn&#39;t exist.</p>
-    <pre><code class="language-js">db.data // === null
+    <pre class="box-x"><code class="language-js">db.data // === null
     db.read()
     db.data // !== null
     </code></pre>
     <h4 id="dbwrite"><code>db.write()</code></h4>
     <p>Calls <code>adapter.write(db.data)</code>.</p>
-    <pre><code class="language-js">db.data = { posts: [] }
+    <pre class="box-x"><code class="language-js">db.data = { posts: [] }
     db.write() // file.json will be { posts: [] }
     db.data = {}
     db.write() // file.json will be {}
@@ -146,7 +146,7 @@
     <h4 id="dbdata"><code>db.data</code></h4>
     <p>Holds your db content. If you&#39;re using the adapters coming with lowdb, it can be any type supported by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify</code></a>.</p>
     <p>For example:</p>
-    <pre><code class="language-js">db.data = &#39;string&#39;
+    <pre class="box-x"><code class="language-js">db.data = &#39;string&#39;
     db.data = [1, 2, 3]
     db.data = { key: &#39;value&#39; }
     </code></pre>
@@ -154,17 +154,17 @@
     <h3 id="lowdb-adapters">Lowdb adapters</h3>
     <h4 id="jsonfile-jsonfilesync"><code>JSONFile</code> <code>JSONFileSync</code></h4>
     <p>Adapters for reading and writing JSON files.</p>
-    <pre><code class="language-js">new Low(new JSONFile(filename))
+    <pre class="box-x"><code class="language-js">new Low(new JSONFile(filename))
     new LowSync(new JSONFileSync(filename))
     </code></pre>
     <h4 id="memory-memorysync"><code>Memory</code> <code>MemorySync</code></h4>
     <p>In-memory adapters. Useful for speeding up unit tests.</p>
-    <pre><code class="language-js">new Low(new Memory())
+    <pre class="box-x"><code class="language-js">new Low(new Memory())
     new LowSync(new MemorySync())
     </code></pre>
     <h4 id="localstorage"><code>LocalStorage</code></h4>
     <p>Synchronous adapter for <code>window.localStorage</code>.</p>
-    <pre><code class="language-js">new LowSync(new LocalStorage(name))
+    <pre class="box-x"><code class="language-js">new LowSync(new LocalStorage(name))
     </code></pre>
     <h4 id="textfile-textfilesync"><code>TextFile</code> <code>TextFileSync</code></h4>
     <p>Adapters for reading and writing text. Useful for creating custom adapters.</p>
@@ -173,7 +173,7 @@
     <h3 id="writing-your-own-adapter">Writing your own adapter</h3>
     <p>You may want to create an adapter to write <code>db.data</code> to YAML, XML, encrypt data, a remote storage, ...</p>
     <p>An adapter is a simple class that just needs to expose two methods:</p>
-    <pre><code class="language-js">class AsyncAdapter {
+    <pre class="box-x"><code class="language-js">class AsyncAdapter {
     read() { /* ... */ } // should return Promise&lt;data&gt;
     write(data) { /* ... */ } // should return Promise&lt;void&gt;
     }
@@ -184,7 +184,7 @@
     }
     </code></pre>
     <p>For example, let&#39;s say you have some async storage and want to create an adapter for it:</p>
-    <pre><code class="language-js">import { api } from &#39;./AsyncStorage&#39;
+    <pre class="box-x"><code class="language-js">import { api } from &#39;./AsyncStorage&#39;
 
     class CustomAsyncAdapter {
     // Optional: your adapter can take arguments
@@ -208,7 +208,7 @@
     <h4 id="custom-serialization">Custom serialization</h4>
     <p>To create an adapter for another format than JSON, you can use <code>TextFile</code> or <code>TextFileSync</code>. </p>
     <p>For example:</p>
-    <pre><code class="language-js">import { Adapter, Low, TextFile } from &#39;lowdb&#39;
+    <pre class="box-x"><code class="language-js">import { Adapter, Low, TextFile } from &#39;lowdb&#39;
     import YAML from &#39;yaml&#39;
 
     class YAMLFile {
