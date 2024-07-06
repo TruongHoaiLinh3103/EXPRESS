@@ -176,9 +176,9 @@ new LowSync(new MemorySync())
     <pre class="box-x"><code class="language-js">class AsyncAdapter {
     read() { /* ... */ } // should return Promise&lt;data&gt;
     write(data) { /* ... */ } // should return Promise&lt;void&gt;
-    }
+}
 
-    class SyncAdapter {
+class SyncAdapter {
     read() { /* ... */ } // should return data
     write(data) { /* ... */ } // should return nothing
 }
