@@ -10,19 +10,19 @@
     <h1 id="lowdb--nodejs-ci">Lowdb</h1>
     <p>Simple to use local JSON database. Use native JavaScript API to query. Written in TypeScript. 🦉</p>
     <pre class="box-x"><code class="language-js">// Edit db.json content using native JS API
-    db.data
-    .posts
-    .push({ id: 1, title: &#39;lowdb is awesome&#39; })
+db.data
+.posts
+.push({ id: 1, title: &#39;lowdb is awesome&#39; })
 
-    // Save to file
-    db.write()
+// Save to file
+db.write()
     </code></pre>
     <pre class="box-x"><code class="language-js">// db.json
-    {
+{
     &quot;posts&quot;: [
         { &quot;id&quot;: 1, &quot;title&quot;: &quot;lowdb is awesome&quot; }
     ]
-    }
+}
     </code></pre>
     <h2 id="install">Install</h2>
     <pre class="box-x"><code class="language-sh">npm install lowdb
@@ -30,85 +30,85 @@
     <h2 id="usage">Usage</h2>
     <p><em>Lowdb is a pure ESM package. If you&#39;re having trouble importing it in your project, please <a href="https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c">read this</a>.</em></p>
     <pre class="box-x"><code class="language-js">import { join, dirname } from &#39;node:path&#39;
-    import { fileURLToPath } from &#39;node:url&#39;
+import { fileURLToPath } from &#39;node:url&#39;
 
-    // This will work for a local JSON file, for browser usage see examples/ directory
-    import { Low, JSONFile } from &#39;lowdb&#39;
+// This will work for a local JSON file, for browser usage see examples/ directory
+import { Low, JSONFile } from &#39;lowdb&#39;
 
-    const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-    const file = join(__dirname, &#39;db.json&#39;)
-    const adapter = new JSONFile(file)
-    const db = new Low(adapter)
+const file = join(__dirname, &#39;db.json&#39;)
+const adapter = new JSONFile(file)
+const db = new Low(adapter)
 
-    // Read data from JSON file, this will set db.data content
-    await db.read()
+// Read data from JSON file, this will set db.data content
+await db.read()
 
-    // If db.json doesn&#39;t exist, db.data will be null
-    // Set default data
-    // db.data = db.data || { posts: [] } // Node &lt; v15.x
-    db.data ||= { posts: [] }             // Node &gt;= 15.x
+// If db.json doesn&#39;t exist, db.data will be null
+// Set default data
+// db.data = db.data || { posts: [] } // Node &lt; v15.x
+db.data ||= { posts: [] }             // Node &gt;= 15.x
 
-    // Create and query items using native JS API
-    db.data.posts.push(&#39;hello world&#39;)
-    const firstPost = db.data.posts[0]
+// Create and query items using native JS API
+db.data.posts.push(&#39;hello world&#39;)
+const firstPost = db.data.posts[0]
 
-    // Alternatively, you can also use this syntax if you prefer
-    const { posts } = db.data
-    posts.push(&#39;hello world&#39;)
+// Alternatively, you can also use this syntax if you prefer
+const { posts } = db.data
+posts.push(&#39;hello world&#39;)
 
-    // Finally write db.data content to file
-    await db.write()
+// Finally write db.data content to file
+await db.write()
     </code></pre>
     <pre class="box-x"><code class="language-js">// db.json
-    {
+{
     &quot;posts&quot;: [ &quot;hello world&quot; ]
-    }
+}
     </code></pre>
     <h3 id="typescript">TypeScript</h3>
     <p>You can use TypeScript to type check your data.</p>
     <pre class="box-x"><code class="language-ts">type Data = {
     words: string[]
-    }
+}
 
-    const adapter = new JSONFile&lt;Data&gt;(&#39;db.json&#39;)
-    const db = new Low(adapter)
+const adapter = new JSONFile&lt;Data&gt;(&#39;db.json&#39;)
+const db = new Low(adapter)
 
-    db.data
-    .words
-    .push(&#39;foo&#39;) // ✅
+db.data
+.words
+.push(&#39;foo&#39;) // ✅
 
-    db.data
-    .words
-    .push(1) // ❌
+db.data
+.words
+.push(1) // ❌
     </code></pre>
     <h3 id="lodash">Lodash</h3>
     <p>You can also add lodash or other utility libraries to improve lowdb.</p>
     <pre class="box-x"><code class="language-ts">import lodash from &#39;lodash&#39;
 
-    type Post = {
+type Post = {
     id: number;
     title: string;
-    }
+}
 
-    type Data = {
+type Data = {
     posts: Post[]
-    }
+}
 
-    // Extend Low class with a new `chain` field
-    class LowWithLodash&lt;T&gt; extends Low&lt;T&gt; {
+// Extend Low class with a new `chain` field
+class LowWithLodash&lt;T&gt; extends Low&lt;T&gt; {
     chain: lodash.ExpChain&lt;this[&#39;data&#39;]&gt; = lodash.chain(this).get(&#39;data&#39;)
-    }
+}
 
-    const adapter = new JSONFile&lt;Data&gt;(&#39;db.json&#39;)
-    const db = new LowWithLodash(adapter)
-    await db.read()
+const adapter = new JSONFile&lt;Data&gt;(&#39;db.json&#39;)
+const db = new LowWithLodash(adapter)
+await db.read()
 
-    // Instead of db.data use db.chain to access lodash API
-    const post = db.chain
-    .get(&#39;posts&#39;)
-    .find({ id: 1 })
-    .value() // Important: value() must be called to execute chain
+// Instead of db.data use db.chain to access lodash API
+const post = db.chain
+.get(&#39;posts&#39;)
+.find({ id: 1 })
+.value() // Important: value() must be called to execute chain
     </code></pre>
     <h2 id="api">API</h2>
     <h3 id="classes">Classes</h3>
@@ -116,51 +116,51 @@
     <h4 id="new-lowadapter"><code>new Low(adapter)</code></h4>
     <pre class="box-x"><code class="language-js">import { Low, JSONFile } from &#39;lowdb&#39;
 
-    const db = new Low(new JSONFile(&#39;file.json&#39;))
-    await db.read()
-    await db.write()
+const db = new Low(new JSONFile(&#39;file.json&#39;))
+await db.read()
+await db.write()
     </code></pre>
     <h4 id="new-lowsyncadaptersync"><code>new LowSync(adapterSync)</code></h4>
     <pre class="box-x"><code class="language-js">import { LowSync, JSONFileSync } from &#39;lowdb&#39;
 
-    const db = new LowSync(new JSONFileSync(&#39;file.json&#39;))
-    db.read()
-    db.write()
+const db = new LowSync(new JSONFileSync(&#39;file.json&#39;))
+db.read()
+db.write()
     </code></pre>
     <h3 id="methods">Methods</h3>
     <h4 id="dbread"><code>db.read()</code></h4>
     <p>Calls <code>adapter.read()</code> and sets <code>db.data</code>.</p>
     <p><strong>Note:</strong> <code>JSONFile</code> and <code>JSONFileSync</code> adapters will set <code>db.data</code> to <code>null</code> if file doesn&#39;t exist.</p>
     <pre class="box-x"><code class="language-js">db.data // === null
-    db.read()
-    db.data // !== null
+db.read()
+db.data // !== null
     </code></pre>
     <h4 id="dbwrite"><code>db.write()</code></h4>
     <p>Calls <code>adapter.write(db.data)</code>.</p>
     <pre class="box-x"><code class="language-js">db.data = { posts: [] }
-    db.write() // file.json will be { posts: [] }
-    db.data = {}
-    db.write() // file.json will be {}
+db.write() // file.json will be { posts: [] }
+db.data = {}
+db.write() // file.json will be {}
     </code></pre>
     <h3 id="properties">Properties</h3>
     <h4 id="dbdata"><code>db.data</code></h4>
     <p>Holds your db content. If you&#39;re using the adapters coming with lowdb, it can be any type supported by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify</code></a>.</p>
     <p>For example:</p>
     <pre class="box-x"><code class="language-js">db.data = &#39;string&#39;
-    db.data = [1, 2, 3]
-    db.data = { key: &#39;value&#39; }
+db.data = [1, 2, 3]
+db.data = { key: &#39;value&#39; }
     </code></pre>
     <h2 id="adapters">Adapters</h2>
     <h3 id="lowdb-adapters">Lowdb adapters</h3>
     <h4 id="jsonfile-jsonfilesync"><code>JSONFile</code> <code>JSONFileSync</code></h4>
     <p>Adapters for reading and writing JSON files.</p>
     <pre class="box-x"><code class="language-js">new Low(new JSONFile(filename))
-    new LowSync(new JSONFileSync(filename))
+new LowSync(new JSONFileSync(filename))
     </code></pre>
     <h4 id="memory-memorysync"><code>Memory</code> <code>MemorySync</code></h4>
     <p>In-memory adapters. Useful for speeding up unit tests.</p>
     <pre class="box-x"><code class="language-js">new Low(new Memory())
-    new LowSync(new MemorySync())
+new LowSync(new MemorySync())
     </code></pre>
     <h4 id="localstorage"><code>LocalStorage</code></h4>
     <p>Synchronous adapter for <code>window.localStorage</code>.</p>
@@ -181,41 +181,41 @@
     class SyncAdapter {
     read() { /* ... */ } // should return data
     write(data) { /* ... */ } // should return nothing
-    }
+}
     </code></pre>
     <p>For example, let&#39;s say you have some async storage and want to create an adapter for it:</p>
     <pre class="box-x"><code class="language-js">import { api } from &#39;./AsyncStorage&#39;
 
-    class CustomAsyncAdapter {
+class CustomAsyncAdapter {
     // Optional: your adapter can take arguments
     constructor(args) {
         // ...
     }
-
+    
     async read() {
         const data = await api.read()
         return data
     }
-
+    
     async write(data) {
         await api.write(data)
     }
-    }
+}
 
-    const adapter = new CustomAsyncAdapter()
-    const db = new Low(adapter)
+const adapter = new CustomAsyncAdapter()
+const db = new Low(adapter)
     </code></pre>
     <h4 id="custom-serialization">Custom serialization</h4>
     <p>To create an adapter for another format than JSON, you can use <code>TextFile</code> or <code>TextFileSync</code>. </p>
     <p>For example:</p>
     <pre class="box-x"><code class="language-js">import { Adapter, Low, TextFile } from &#39;lowdb&#39;
-    import YAML from &#39;yaml&#39;
+import YAML from &#39;yaml&#39;
 
-    class YAMLFile {
+class YAMLFile {
     constructor(filename) {
         this.adapter = new TextFile(filename)
     }
-
+    
     async read() {
         const data = await this.adapter.read()
         if (data === null) {
@@ -224,14 +224,14 @@
         return YAML.parse(data)
         }
     }
-
+    
     write(obj) {
         return this.adapter.write(YAML.stringify(obj))
     }
-    }
+}
 
-    const adapter = new YAMLFile(&#39;file.yaml&#39;)
-    const db = new Low(adapter)
+const adapter = new YAMLFile(&#39;file.yaml&#39;)
+const db = new Low(adapter)
     </code></pre>
     <h2 id="limits">Limits</h2>
     <p>Lowdb doesn&#39;t support Node&#39;s cluster module.</p>
